@@ -1,10 +1,10 @@
-# Phaser 3 Webpack Project Template
+# Gameoff 2018
 
-A Phaser 3 Project Template
+
 
 ### Requirements
 
-We need [Node.js](https://nodejs.org) to install and run scripts.
+We use [Node.js](https://nodejs.org) to install and run scripts.
 
 ## Install and run
 
