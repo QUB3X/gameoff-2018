@@ -4,7 +4,11 @@
 
 ### Requirements
 
-We use [Node.js](https://nodejs.org) to install and run scripts.
+- [Node.js](https://nodejs.org)
+
+- [Socket.io](https://socket.io)
+
+- [Phaser.io](https://phaser.io)
 
 ## Install and run
 
@@ -14,4 +18,4 @@ Run next commands in your terminal:
 |---------|-------------|
 | `npm install` | Install dependencies and launch browser with examples.|
 | `npm start` | Launch browser to show the examples. <br> Press `Ctrl + c` to kill **http-server** process. |
-=======
+| `npm run node` | Start NodeJS server without running Webpack |
