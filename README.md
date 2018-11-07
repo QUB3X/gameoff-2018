@@ -8,7 +8,7 @@
 
 - [Socket.io](https://socket.io)
 
-- [Phaser.io](https://phaser.io)
+- [Phaser.io](https://phaser.io), see docs [here](https://photonstorm.github.io/phaser3-docs/index.html)
 
 ## Install and run
 
