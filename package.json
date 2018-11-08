@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Our entry for Github 2018 Gameoff Gamejam",
   "main": "src/index.js",
-
   "scripts": {
     "build": "webpack",
     "start": "npm run build && node ./main.js",
@@ -21,7 +20,6 @@
   },
   "homepage": "https://github.com/QUB3X/gameoff-2018#readme",
   "devDependencies": {
-    "webpack-dev-server": "^2.11.0",
     "webpack": "^3.4.1",
     "raw-loader": "^0.5.1"
   },
