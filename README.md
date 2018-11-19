@@ -2,7 +2,7 @@
 
 ## Required Tools
 
-- **[Unity](https://unity3d.com/)** 2018.2.15f1
+- **[Unity](https://unity3d.com/)** ~~2018.2.16f1~~ 2018.2.16f1
 - **[Visual Studio Code](https://code.visualstudio.com/)** or **[Visual Studio](https://visualstudio.microsoft.com/)**
 - **[Git CLI](https://git-scm.com/)** or **[Github Desktop](https://desktop.github.com/)**
 
