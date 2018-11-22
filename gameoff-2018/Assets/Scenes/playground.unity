@@ -703,8 +703,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
-  speed: 6
-  lerpTime: 0.5
+  speed: 1
+  lerpTime: 0.3
 --- !u!50 &1174546400
 Rigidbody2D:
   serializedVersion: 4
