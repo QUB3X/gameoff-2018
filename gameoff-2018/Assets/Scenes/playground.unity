@@ -457,6 +457,8 @@ GameObject:
   m_Component:
   - component: {fileID: 894137695}
   - component: {fileID: 894137694}
+  - component: {fileID: 894137696}
+  - component: {fileID: 894137697}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -523,6 +525,35 @@ Transform:
   m_Father: {fileID: 1845337121}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!68 &894137696
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 894137693}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.2, y: -0.14}
+  - {x: 0.2, y: -0.14}
+--- !u!114 &894137697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 894137693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7aa4505018784f40b80d1c4ec1ac441, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  world: {fileID: 1845337122}
 --- !u!1 &1068204745
 GameObject:
   m_ObjectHideFlags: 0
@@ -904,6 +935,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1845337121}
+  - component: {fileID: 1845337122}
   m_Layer: 0
   m_Name: RoomA
   m_TagString: Untagged
@@ -928,6 +960,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1845337122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1845337120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3346153f30f65294e9fa25a6083676dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeScaleDelta: 0.05
 --- !u!1 &1917600145
 GameObject:
   m_ObjectHideFlags: 0

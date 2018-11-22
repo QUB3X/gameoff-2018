@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour {
 		if(rb == null) {
             rb = GameObject.Find("/Player").GetComponent<Rigidbody2D>();
         }
+
 	}
 	
 	// Update is called once per frame
@@ -30,13 +31,5 @@ public class PlayerMovement : MonoBehaviour {
             v.Normalize();
 
         rb.velocity = Vector2.Lerp(rb.velocity, v*speed, lerpTime);
-        
-
-        // Make player face mouse cursor
-        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 playerPos = transform.position;
-        float angle = Mathf.Atan2(mousePos.y - playerPos.y, mousePos.x - playerPos.x) * Mathf.Rad2Deg - 90;
-        // Lerp it maybe?
-        transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 }
