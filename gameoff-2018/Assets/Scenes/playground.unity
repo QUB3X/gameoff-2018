@@ -520,7 +520,7 @@ Transform:
   m_GameObject: {fileID: 894137693}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2.36, z: -2}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1845337121}
   m_RootOrder: 1
@@ -540,8 +540,8 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -0.2, y: -0.14}
-  - {x: 0.2, y: -0.14}
+  - {x: -0.8, y: -0.56}
+  - {x: 0.8, y: -0.56}
 --- !u!114 &894137697
 MonoBehaviour:
   m_ObjectHideFlags: 0
