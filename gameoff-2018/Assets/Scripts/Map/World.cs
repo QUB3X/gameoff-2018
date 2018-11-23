@@ -6,12 +6,15 @@ public class World : MonoBehaviour {
 
     public float timeScaleDelta = 0.05f;
     public bool IsFrozen { get; private set; }
-    public bool CurrentRoom { get; private set; }
+    public char CurrentRoom { get; private set; }
 
     public Camera cam;
+    public Animator animator;
 
     private Dictionary<char, GameObject> maps = new Dictionary<char, GameObject>();
     private GameObject doorPrefab;
+    private char roomToLoad;
+    private bool spawnDoors;
 
     private void Start() {
         foreach(GameObject o in Resources.LoadAll<GameObject>("Rooms")) {
@@ -31,6 +34,10 @@ public class World : MonoBehaviour {
 
     public void Freeze() {
         this.IsFrozen = true;
+    }
+
+    public void Unfreeze() {
+        this.IsFrozen = false;
     }
 
     public void LoadRoom(char id, bool spawnDoors = false) {
@@ -73,12 +80,12 @@ public class World : MonoBehaviour {
                 // Set color to background
                 Vector2 normalDirection = new Vector2(door.transform.position.x == 0 ? 0 : Mathf.Sign(door.transform.position.x),
                                                       door.transform.position.y == 0 ? 0 : Mathf.Sign(door.transform.position.y));
-                Vector2 pixel = new Vector2(normalDirection.x * bg.width/2 * 0.8f, normalDirection.y * bg.height/2 * 0.8f);
+                Vector2 pixel = new Vector2(normalDirection.x * bg.width / 2 * 0.8f, normalDirection.y * bg.height / 2 * 0.8f);
                 pixel += new Vector2(bg.width / 2, bg.height / 2);
                 doorSprite.color = bg.GetPixel((int)pixel.x, (int)pixel.y);
 
                 // If we can enter the door, attach script
-                if(i != 0) {
+                if (i != 0) {
                     Door doorScript = door.AddComponent<Door>();
                     doorScript.world = this;
                 } else {
@@ -89,7 +96,7 @@ public class World : MonoBehaviour {
 
                 // Pick a new different location
                 int newPos = Random.Range(0, 3);
-                while(newPos == pos)
+                while (newPos == pos)
                     newPos = Random.Range(0, 3);
                 pos = newPos;
             }
@@ -98,5 +105,19 @@ public class World : MonoBehaviour {
             GameObject spawn = GameObject.FindGameObjectWithTag("Spawn");
             GameObject.Find("/Player").transform.position = new Vector3(spawn.transform.position.x * 0.7f, spawn.transform.position.y * 0.7f, -1);
         }
+
+        this.CurrentRoom = id;
+    }
+
+    public void FadeToRoom(char id, bool spawnDoors = false) {
+        this.roomToLoad = id;
+        this.spawnDoors = spawnDoors;
+        animator.SetTrigger("FadeOut");
+    }
+
+    public void OnFadeOutComplete() {
+        LoadRoom(roomToLoad, spawnDoors);
+        animator.SetTrigger("FadeIn");
+        Unfreeze();
     }
 }
