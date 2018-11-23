@@ -220,7 +220,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeScaleDelta: 0.05
   cam: {fileID: 519420031}
-  animator: {fileID: 905090586}
+  sceneAnimator: {fileID: 905090586}
+  playerAnimator: {fileID: 1174546401}
 --- !u!4 &905090585
 Transform:
   m_ObjectHideFlags: 0
@@ -268,7 +269,7 @@ GameObject:
   - component: {fileID: 1174546401}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

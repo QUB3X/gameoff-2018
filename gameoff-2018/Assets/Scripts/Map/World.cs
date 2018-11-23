@@ -9,7 +9,8 @@ public class World : MonoBehaviour {
     public char CurrentRoom { get; private set; }
 
     public Camera cam;
-    public Animator animator;
+    public Animator sceneAnimator;
+    public Animator playerAnimator;
 
     private Dictionary<char, GameObject> maps = new Dictionary<char, GameObject>();
     private GameObject doorPrefab;
@@ -89,9 +90,7 @@ public class World : MonoBehaviour {
                     Door doorScript = door.AddComponent<Door>();
                     doorScript.world = this;
                 } else {
-                    door.tag = "Spawn";
-                    // Move player
-                    GameObject.Find("/Player").transform.position = new Vector3(door.transform.position.x * 0.7f, door.transform.position.y * 0.7f, -1);
+                    MovePlayerToSpawn(door);
                 }
 
                 // Pick a new different location
@@ -103,7 +102,7 @@ public class World : MonoBehaviour {
         } else {
             // We already have a door to spawn off from
             GameObject spawn = GameObject.FindGameObjectWithTag("Spawn");
-            GameObject.Find("/Player").transform.position = new Vector3(spawn.transform.position.x * 0.7f, spawn.transform.position.y * 0.7f, -1);
+            MovePlayerToSpawn(spawn);
         }
 
         this.CurrentRoom = id;
@@ -112,12 +111,24 @@ public class World : MonoBehaviour {
     public void FadeToRoom(char id, bool spawnDoors = false) {
         this.roomToLoad = id;
         this.spawnDoors = spawnDoors;
-        animator.SetTrigger("FadeOut");
+        sceneAnimator.SetTrigger("FadeOut");
     }
 
     public void OnFadeOutComplete() {
         LoadRoom(roomToLoad, spawnDoors);
-        animator.SetTrigger("FadeIn");
+        sceneAnimator.SetTrigger("FadeIn");
         Unfreeze();
+    }
+
+    public void MovePlayerToSpawn(GameObject spawn) {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player.transform.position = new Vector3(spawn.transform.position.x * 0.8f, spawn.transform.position.y * 0.7f, -1);
+
+        float doorRotation = spawn.transform.rotation.eulerAngles.z;
+        if (doorRotation == 180) {
+            playerAnimator.SetInteger("dirY", 1);
+        } else {
+            playerAnimator.SetInteger("dirY", -1);
+        }
     }
 }

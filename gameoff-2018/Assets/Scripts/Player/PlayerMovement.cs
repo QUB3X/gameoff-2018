@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour {
     void Start () {
 	}
 
-    private void Update() {
+    private void FixedUpdate() {
         // moveX and moveY are a value between -1 and 1.
         moveX = Input.GetAxisRaw("Horizontal");
         moveY = Input.GetAxisRaw("Vertical");
