@@ -6,6 +6,20 @@ public class World : MonoBehaviour {
 
     public float timeScaleDelta = 0.05f;
     public bool IsFrozen { get; private set; }
+    public bool CurrentRoom { get; private set; }
+
+    public Camera cam;
+
+    private Dictionary<char, GameObject> maps = new Dictionary<char, GameObject>();
+    private GameObject doorPrefab;
+
+    private void Start() {
+        foreach(GameObject o in Resources.LoadAll<GameObject>("Rooms")) {
+            maps.Add(o.name[0], o);
+        }
+        doorPrefab = Resources.Load<GameObject>("Door");
+        LoadRoom('A');
+    }
 
     void FixedUpdate() {
         if (IsFrozen) {
@@ -17,5 +31,64 @@ public class World : MonoBehaviour {
 
     public void Freeze() {
         this.IsFrozen = true;
+    }
+
+    public void LoadRoom(char id, bool spawnDoors = false) {
+        // Delete any room object instantiated.
+        Destroy(GameObject.FindGameObjectWithTag("Room"));
+
+        // Spawn new room
+        GameObject room = Instantiate(maps[id]);
+        room.name = id.ToString();
+
+        if (spawnDoors) {
+            // Generate 2 doors
+            int pos = Random.Range(0, 3);
+            Texture2D bg = room.transform.Find("Background").GetComponent<SpriteRenderer>().sprite.texture;
+
+            for (int i = 0; i < 2; i++) {
+                GameObject door = Instantiate(doorPrefab);
+                SpriteRenderer doorSprite = door.GetComponent<SpriteRenderer>();
+                door.transform.parent = room.transform;
+
+                switch (pos) {
+                    case 0: // Top
+                        door.transform.localPosition = new Vector3(0, 2.36f, -2);
+                        door.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                        break;
+                    case 1: // Right
+                        door.transform.localPosition = new Vector3(3.36f, 0, -2);
+                        door.transform.localRotation = Quaternion.Euler(0, 0, 270);
+                        break;
+                    case 2: // Bottom
+                        door.transform.localPosition = new Vector3(0, -2.36f, -2);
+                        door.transform.localRotation = Quaternion.Euler(0, 0, 180);
+                        break;
+                    case 3: // Left
+                        door.transform.localPosition = new Vector3(-3.36f, 0, -2);
+                        door.transform.localRotation = Quaternion.Euler(0, 0, 90);
+                        break;
+                }
+
+                // Set color to background
+                Vector2 normalDirection = new Vector2(door.transform.position.x == 0 ? 0 : Mathf.Sign(door.transform.position.x),
+                                                      door.transform.position.y == 0 ? 0 : Mathf.Sign(door.transform.position.y));
+                Vector2 pixel = new Vector2(normalDirection.x * bg.width/2 * 0.8f, normalDirection.y * bg.height/2 * 0.8f);
+                pixel += new Vector2(bg.width / 2, bg.height / 2);
+                doorSprite.color = bg.GetPixel((int)pixel.x, (int)pixel.y);
+
+                // If we can enter the door, attach script
+                if(i != 0) {
+                    Door doorScript = door.AddComponent<Door>();
+                    doorScript.world = this;
+                }
+
+                // Pick a new different location
+                int newPos = Random.Range(0, 3);
+                while(newPos == pos)
+                    newPos = Random.Range(0, 3);
+                pos = newPos;
+            }
+        }
     }
 }
