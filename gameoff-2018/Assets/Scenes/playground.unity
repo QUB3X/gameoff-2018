@@ -657,13 +657,13 @@ CircleCollider2D:
   m_GameObject: {fileID: 1174546395}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 745684d71b50ae24e86f6a7f8487f240, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.05
+  m_Radius: 0.16
 --- !u!212 &1174546397
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -815,7 +815,7 @@ EdgeCollider2D:
   m_GameObject: {fileID: 1690837651}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 745684d71b50ae24e86f6a7f8487f240, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
