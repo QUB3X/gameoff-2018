@@ -81,6 +81,10 @@ public class World : MonoBehaviour {
                 if(i != 0) {
                     Door doorScript = door.AddComponent<Door>();
                     doorScript.world = this;
+                } else {
+                    door.tag = "Spawn";
+                    // Move player
+                    GameObject.Find("/Player").transform.position = new Vector3(door.transform.position.x * 0.7f, door.transform.position.y * 0.7f, -1);
                 }
 
                 // Pick a new different location
@@ -89,6 +93,10 @@ public class World : MonoBehaviour {
                     newPos = Random.Range(0, 3);
                 pos = newPos;
             }
+        } else {
+            // We already have a door to spawn off from
+            GameObject spawn = GameObject.FindGameObjectWithTag("Spawn");
+            GameObject.Find("/Player").transform.position = new Vector3(spawn.transform.position.x * 0.7f, spawn.transform.position.y * 0.7f, -1);
         }
     }
 }
