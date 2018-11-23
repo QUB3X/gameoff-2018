@@ -5,10 +5,10 @@ using UnityEngine;
 public class World : MonoBehaviour {
 
     public float timeScaleDelta = 0.05f;
-    public bool IsFreezed { get; private set; }
+    public bool IsFrozen { get; private set; }
 
     void FixedUpdate() {
-        if (IsFreezed) {
+        if (IsFrozen) {
             Time.timeScale = Mathf.Max(0, Time.timeScale - timeScaleDelta);
         } else {
             Time.timeScale = 1;
@@ -16,6 +16,6 @@ public class World : MonoBehaviour {
     }
 
     public void Freeze() {
-        this.IsFreezed = true;
+        this.IsFrozen = true;
     }
 }
