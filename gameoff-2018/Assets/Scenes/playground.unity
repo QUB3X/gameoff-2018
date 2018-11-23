@@ -362,7 +362,7 @@ MonoBehaviour:
   rb: {fileID: 1174546400}
   anim: {fileID: 1174546401}
   world: {fileID: 905090584}
-  speed: 1
+  speed: 1.4
   lerpTime: 0.3
 --- !u!50 &1174546400
 Rigidbody2D:
