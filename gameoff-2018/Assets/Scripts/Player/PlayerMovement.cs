@@ -6,30 +6,44 @@ public class PlayerMovement : MonoBehaviour {
 
     // Player Movement Variables
     public Rigidbody2D rb;
+    public Animator anim;
     public float speed;
     public float lerpTime;
 
-	// Use this for initialization
-	void Start () {
-		if(rb == null) {
-            rb = GameObject.Find("/Player").GetComponent<Rigidbody2D>();
-        }
+    float moveX = 0;
+    float moveY = 0;
 
+    // Use this for initialization
+    void Start () {
 	}
-	
-	// Update is called once per frame
-	void FixedUpdate () {
-        // moveX and moveY are a value between -1 and 1.
-        float moveX = Input.GetAxisRaw("Horizontal");
-        float moveY = Input.GetAxisRaw("Vertical");
 
+    private void Update() {
+        // moveX and moveY are a value between -1 and 1.
+        moveX = Input.GetAxisRaw("Horizontal");
+        moveY = Input.GetAxisRaw("Vertical");
+
+        // Animate player
+        int dir = 0;
+        if (moveY > 0) dir = 1;
+        if (moveY < 0) dir = -1;
+        // Handle side movement
+        int oldDir = anim.GetInteger("dirY");
+        if (moveX != 0 && dir == 0) {
+            dir = oldDir;
+            var currentState = anim.GetCurrentAnimatorStateInfo(0);
+            if (currentState.IsName("IdleBack")) dir = 1;
+            else if (currentState.IsName("IdleFront")) dir = -1;
+        }
+        
+        anim.SetInteger("dirY", dir);
+    }
+    
+    void FixedUpdate() {
         // Move player
         Vector2 v = new Vector2(moveX, moveY);
-        
         // Don't go faster diagonally
         if (v.magnitude > 1)
             v.Normalize();
-
-        rb.velocity = Vector2.Lerp(rb.velocity, v*speed, lerpTime);
+        rb.velocity = Vector2.Lerp(rb.velocity, v * speed, lerpTime);
     }
 }
