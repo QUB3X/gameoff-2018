@@ -5,28 +5,25 @@ using UnityEngine.UI;
 
 public class Dialog : MonoBehaviour {
 
-  // Set true to show the dialog box
-  private bool showDialog = false;
-
-  // The box containing text
+    // The box containing text
 	public GameObject textContainer;
 
 	public Text text;
 
 	// Use this for initialization
 	void Start () {
-    //textContainer.SetActive(false);
+        //textContainer.SetActive(false);
 	}
 	
-  void Show() {
-    textContainer.SetActive(true);
-  }
+    void Show() {
+        textContainer.SetActive(true);
+    }
 
-  void Hide() {
-    textContainer.SetActive(false);
-  }
+    void Hide() {
+        textContainer.SetActive(false);
+    }
 
-  public void Print(string _text) {
-    text.text = _text;
-  }
+    public void Print(string _text) {
+        text.text = _text;
+    }
 }
