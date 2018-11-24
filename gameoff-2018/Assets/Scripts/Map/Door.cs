@@ -11,6 +11,9 @@ public class Door : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
+        if (!collision.CompareTag("Player"))
+            return;
+
         world.Freeze();
         // Temporarely just load the next room.
         char nextRoom = (char)(world.CurrentRoom + 1);

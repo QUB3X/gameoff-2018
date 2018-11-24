@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerShoot : MonoBehaviour {
     
     public Animator anim;
+    public Transform firePoint;
+    public GameObject bullet;
     public Music music;
 
 	// Use this for initialization
@@ -26,11 +28,14 @@ public class PlayerShoot : MonoBehaviour {
 
         var shoot = Input.GetMouseButtonDown(0) || Input.GetKeyDown("z");
         if (shoot) {
-            if (music.IsOnTime() == 0) {
-                Debug.Log("On time!");
-            } else {
-                //Debug.Log("GIT GUD LUL");
-            }
+            //if (music.IsOnTime() == 0)
+                Shoot();
         }
 	}
+
+
+    public void Shoot() {
+        // Spawn bullet
+        Instantiate(bullet, firePoint.position, firePoint.rotation);
+    }
 }
