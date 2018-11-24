@@ -125,12 +125,5 @@ public class World : MonoBehaviour {
     public void MovePlayerToSpawn(GameObject spawn) {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         player.transform.position = new Vector3(spawn.transform.position.x * 0.8f, spawn.transform.position.y * 0.7f, -1);
-
-        float doorRotation = spawn.transform.rotation.eulerAngles.z;
-        if (doorRotation == 180) {
-            playerAnimator.SetInteger("dirY", 1);
-        } else {
-            playerAnimator.SetInteger("dirY", -1);
-        }
     }
 }
