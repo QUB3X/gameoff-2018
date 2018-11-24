@@ -12,7 +12,7 @@ public class Dialog : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        //textContainer.SetActive(false);
+        textContainer.SetActive(false);
 	}
 	
     void Show() {
