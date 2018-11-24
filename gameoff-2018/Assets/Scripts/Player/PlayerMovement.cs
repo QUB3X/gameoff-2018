@@ -31,19 +31,8 @@ public class PlayerMovement : MonoBehaviour {
                 v.Normalize();
             rb.velocity = Vector2.Lerp(rb.velocity, v * speed, lerpTime);
 
-            int dir = 0;
-            if (moveY > 0) dir = 1;
-            if (moveY < 0) dir = -1;
-            // Handle side movement
-            int oldDir = anim.GetInteger("dirY");
-            if (moveX != 0 && dir == 0) {
-                dir = oldDir;
-                var currentState = anim.GetCurrentAnimatorStateInfo(0);
-                if (currentState.IsName("IdleBack")) dir = 1;
-                else if (currentState.IsName("IdleFront")) dir = -1;
-            }
-
-            anim.SetInteger("dirY", dir);
+            anim.SetBool("playerIsMoving", v.magnitude > 0);
+            anim.SetFloat("mousePosition", Camera.main.ScreenToWorldPoint(Input.mousePosition).y - rb.transform.position.y);
         }
     }
 }
