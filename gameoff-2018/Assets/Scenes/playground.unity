@@ -200,6 +200,7 @@ GameObject:
   - component: {fileID: 905090585}
   - component: {fileID: 905090584}
   - component: {fileID: 905090586}
+  - component: {fileID: 905090587}
   m_Layer: 0
   m_Name: MapController
   m_TagString: Untagged
@@ -222,6 +223,7 @@ MonoBehaviour:
   cam: {fileID: 519420031}
   sceneAnimator: {fileID: 905090586}
   playerAnimator: {fileID: 1174546401}
+  musicManager: {fileID: 905090587}
 --- !u!4 &905090585
 Transform:
   m_ObjectHideFlags: 0
@@ -254,6 +256,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &905090587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 905090583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a6534488025bac49aad37811a267d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ACCEPTABLE_TIME_OFFSET: 30
+  UNITY_AUDIO_LATENCY: 45
 --- !u!1 &1174546395
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,6 +279,7 @@ GameObject:
   - component: {fileID: 1174546398}
   - component: {fileID: 1174546397}
   - component: {fileID: 1174546399}
+  - component: {fileID: 1174546402}
   - component: {fileID: 1174546400}
   - component: {fileID: 1174546396}
   - component: {fileID: 1174546401}
@@ -402,6 +418,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1174546402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1174546395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02d9801ee8e2ac84392f4f66f85f35a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  music: {fileID: 905090587}
 --- !u!1 &1236660556
 GameObject:
   m_ObjectHideFlags: 0

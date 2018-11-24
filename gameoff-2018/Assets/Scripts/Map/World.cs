@@ -11,6 +11,7 @@ public class World : MonoBehaviour {
     public Camera cam;
     public Animator sceneAnimator;
     public Animator playerAnimator;
+    public Music musicManager;
 
     private Dictionary<char, GameObject> maps = new Dictionary<char, GameObject>();
     private GameObject doorPrefab;
@@ -106,6 +107,7 @@ public class World : MonoBehaviour {
         }
 
         this.CurrentRoom = id;
+        musicManager.LoadMusic(room.GetComponentInChildren<AudioSource>());
     }
 
     public void FadeToRoom(char id, bool spawnDoors = false) {
