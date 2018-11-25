@@ -11,12 +11,18 @@ public class World : MonoBehaviour {
     public Camera cam;
     public Animator sceneAnimator;
     public Animator playerAnimator;
-    public Music musicManager;
+
+    // Assign the player object
+    public GameObject player;
 
     private Dictionary<char, GameObject> maps = new Dictionary<char, GameObject>();
     private GameObject doorPrefab;
     private char roomToLoad;
     private bool spawnDoors;
+
+    // Used to remove player movement
+    private System.Type currentPlayerMovement;
+    private System.Type currentPlayerAttack;
 
     private void Start() {
         foreach(GameObject o in Resources.LoadAll<GameObject>("Rooms")) {
@@ -24,6 +30,8 @@ public class World : MonoBehaviour {
         }
         doorPrefab = Resources.Load<GameObject>("Door");
         LoadRoom('A');
+        ChangePlayerMovement('A');
+        ChangePlayerAttack('A');
     }
 
     void FixedUpdate() {
@@ -107,7 +115,6 @@ public class World : MonoBehaviour {
         }
 
         this.CurrentRoom = id;
-        musicManager.LoadMusic(room.GetComponentInChildren<AudioSource>());
     }
 
     public void FadeToRoom(char id, bool spawnDoors = false) {
@@ -125,5 +132,21 @@ public class World : MonoBehaviour {
     public void MovePlayerToSpawn(GameObject spawn) {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         player.transform.position = new Vector3(spawn.transform.position.x * 0.8f, spawn.transform.position.y * 0.7f, -1);
+    }
+
+    public void ChangePlayerMovement(char scriptId) {
+        if(currentPlayerMovement != null) {
+            Destroy(player.GetComponent(currentPlayerMovement));
+        }
+        var script = System.Type.GetType("Move" + scriptId);
+        player.AddComponent(script);
+    }
+
+    public void ChangePlayerAttack(char scriptId) {
+        if (currentPlayerAttack != null) {
+            Destroy(player.GetComponent(currentPlayerAttack));
+        }
+        var script = System.Type.GetType("Attack" + scriptId);
+        player.AddComponent(script);
     }
 }

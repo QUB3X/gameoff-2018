@@ -11,12 +11,10 @@ public class PlayerMovement : MonoBehaviour {
     public float speed;
     public float lerpTime;
 
-    float moveX = 0;
-    float moveY = 0;
-
-    // Use this for initialization
-    void Start () {
-	}
+    [HideInInspector]
+    public float moveX = 0;
+    [HideInInspector]
+    public float moveY = 0;
 
     private void FixedUpdate() {
         // moveX and moveY are a value between -1 and 1.
@@ -25,13 +23,7 @@ public class PlayerMovement : MonoBehaviour {
 
         // Move and animate player
         if (!world.IsFrozen) {
-            Vector2 v = new Vector2(moveX, moveY);
-            // Don't go faster diagonally
-            if (v.magnitude > 1)
-                v.Normalize();
-            rb.velocity = Vector2.Lerp(rb.velocity, v * speed, lerpTime);
-
-            anim.SetBool("playerIsMoving", v.magnitude > 0);
+            anim.SetBool("playerIsMoving", rb.velocity.magnitude > 0);
             anim.SetFloat("mousePosition", Camera.main.ScreenToWorldPoint(Input.mousePosition).y - rb.transform.position.y);
         }
     }
