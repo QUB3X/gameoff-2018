@@ -470,8 +470,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UIAnimator: {fileID: 905090586}
-  ACCEPTABLE_TIME_OFFSET: 50
-  UNITY_AUDIO_LATENCY: 90
+  ACCEPTABLE_TIME_OFFSET: 100
+  UNITY_AUDIO_LATENCY: 0
 --- !u!1 &1174546395
 GameObject:
   m_ObjectHideFlags: 0

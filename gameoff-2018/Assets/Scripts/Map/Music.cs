@@ -20,7 +20,6 @@ public class Music : MonoBehaviour {
             float offset = ((int)(currentTime * 1000) % (int)(timeBetweenBeats * 1000)) / 1000f;
             if (offset < previousOffset) {
                 // Beat!
-                // TODO: Show in UI
                 UIAnimator.SetTrigger("Beat");
             }
             previousOffset = offset;
@@ -35,7 +34,7 @@ public class Music : MonoBehaviour {
         audioSource.PlayScheduled(next);
         // TODO: Fetch from database:
         this.musicBPM = 66;
-        this.musicBeatStart = 120;
+        this.musicBeatStart = 800;
         this.timeBetweenBeats = 1000 * 60 / musicBPM;
         Debug.Log("Time between beats: " + timeBetweenBeats);
     }
