@@ -35,6 +35,7 @@ public class PlayerShoot : MonoBehaviour {
 
 
     public void Shoot() {
+        anim.SetTrigger("shoot");
         // Spawn bullet
         Instantiate(bullet, firePoint.position, firePoint.rotation);
     }
