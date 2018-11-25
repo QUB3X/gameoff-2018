@@ -18,7 +18,7 @@ public class Door : MonoBehaviour {
         world.Freeze();
         // Temporarely just load the next room.
         char nextRoom = (char)(world.CurrentRoom + 1);
-        bool shouldSpawnDoors = nextRoom == 'F' ? false : true;
+        bool shouldSpawnDoors = (nextRoom == 'F' ? false : true);
         world.ChangeRoom(nextRoom, shouldSpawnDoors);
     }
 }

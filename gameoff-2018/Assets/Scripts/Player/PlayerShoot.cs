@@ -7,13 +7,9 @@ public class PlayerShoot : MonoBehaviour {
     public Animator anim;
     public Transform firePoint;
     public GameObject bullet;
-    public Music music;
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
+    
+    [HideInInspector]
+    public bool isShooting;
 	// Update is called once per frame
 	void Update () {
         // Make weapon follow mouse cursor
@@ -26,17 +22,6 @@ public class PlayerShoot : MonoBehaviour {
                                                      weapon.transform.localPosition.y,
                                                      anim.GetFloat("mousePosition") > 0 ? 1 : -1);
 
-        var shoot = Input.GetMouseButtonDown(0) || Input.GetKeyDown("z");
-        if (shoot) {
-            if (music.IsOnTime(correctLatency: true) == 0)
-                Shoot();
-        }
+        isShooting = Input.GetMouseButtonDown(0) || Input.GetKeyDown("z");
 	}
-
-
-    public void Shoot() {
-        anim.SetTrigger("shoot");
-        // Spawn bullet
-        Instantiate(bullet, firePoint.position, firePoint.rotation);
-    }
 }
