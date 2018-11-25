@@ -50,69 +50,75 @@ public class World : MonoBehaviour {
         GameObject room = Instantiate(maps[id]);
         room.name = id.ToString();
 
-        if (spawnDoors) {
-            // Generate 2 doors
-            int pos = Random.Range(0, 3);
-            Texture2D bg = room.transform.Find("Background").GetComponent<SpriteRenderer>().sprite.texture;
+        if (spawnDoors)
+            SpawnDoors(room);
 
-            for (int i = 0; i < 2; i++) {
-                GameObject door = Instantiate(doorPrefab);
-                SpriteRenderer doorSprite = door.GetComponent<SpriteRenderer>();
-                door.transform.parent = room.transform;
-
-                switch (pos) {
-                    case 0: // Top
-                        door.transform.localPosition = new Vector3(0, 2.36f, -2);
-                        door.transform.localRotation = Quaternion.Euler(0, 0, 0);
-                        break;
-                    case 1: // Right
-                        door.transform.localPosition = new Vector3(3.36f, 0, -2);
-                        door.transform.localRotation = Quaternion.Euler(0, 0, 270);
-                        break;
-                    case 2: // Bottom
-                        door.transform.localPosition = new Vector3(0, -2.36f, -2);
-                        door.transform.localRotation = Quaternion.Euler(0, 0, 180);
-                        break;
-                    case 3: // Left
-                        door.transform.localPosition = new Vector3(-3.36f, 0, -2);
-                        door.transform.localRotation = Quaternion.Euler(0, 0, 90);
-                        break;
-                }
-
-                // Set color to background
-                Vector2 normalDirection = new Vector2(door.transform.position.x == 0 ? 0 : Mathf.Sign(door.transform.position.x),
-                                                      door.transform.position.y == 0 ? 0 : Mathf.Sign(door.transform.position.y));
-                Vector2 pixel = new Vector2(normalDirection.x * bg.width / 2 * 0.8f, normalDirection.y * bg.height / 2 * 0.8f);
-                pixel += new Vector2(bg.width / 2, bg.height / 2);
-                doorSprite.color = bg.GetPixel((int)pixel.x, (int)pixel.y);
-
-                // If we can enter the door, attach script
-                if (i != 0) {
-                    Door doorScript = door.AddComponent<Door>();
-                    doorScript.world = this;
-                } else {
-                    MovePlayerToSpawn(door);
-                }
-
-                // Pick a new different location
-                int newPos = Random.Range(0, 3);
-                while (newPos == pos)
-                    newPos = Random.Range(0, 3);
-                pos = newPos;
-            }
-        } else {
-            // We already have a door to spawn off from
-            GameObject spawn = GameObject.FindGameObjectWithTag("Spawn");
-            MovePlayerToSpawn(spawn);
-        }
+        MovePlayerToSpawn();
 
         this.CurrentRoom = id;
         musicManager.LoadMusic(room.GetComponentInChildren<AudioSource>());
     }
 
-    public void FadeToRoom(char id, bool spawnDoors = false) {
+    public void SpawnDoors(GameObject room) {
+        // Generate 2 doors
+        int pos = Random.Range(0, 3);
+        Texture2D bg = room.transform.Find("Background").GetComponent<SpriteRenderer>().sprite.texture;
+
+        for (int i = 0; i < 2; i++) {
+            GameObject door = Instantiate(doorPrefab);
+            SpriteRenderer doorSprite = door.GetComponentInChildren<SpriteRenderer>();
+            door.transform.parent = room.transform;
+
+            switch (pos) {
+                case 0: // Top
+                    door.transform.localPosition = new Vector3(0, 1.80f, -2);
+                    door.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                    break;
+                case 1: // Right
+                    door.transform.localPosition = new Vector3(2.80f, 0, -2);
+                    door.transform.localRotation = Quaternion.Euler(0, 0, 270);
+                    break;
+                case 2: // Bottom
+                    door.transform.localPosition = new Vector3(0, -1.80f, -2);
+                    door.transform.localRotation = Quaternion.Euler(0, 0, 180);
+                    break;
+                case 3: // Left
+                    door.transform.localPosition = new Vector3(-2.80f, 0, -2);
+                    door.transform.localRotation = Quaternion.Euler(0, 0, 90);
+                    break;
+            }
+
+            // Set color to background
+            Vector2 normalDirection = new Vector2(door.transform.position.x == 0 ? 0 : Mathf.Sign(door.transform.position.x),
+                                                    door.transform.position.y == 0 ? 0 : Mathf.Sign(door.transform.position.y));
+            Vector2 pixel = new Vector2(normalDirection.x * bg.width / 2 * 0.8f, normalDirection.y * bg.height / 2 * 0.8f);
+            pixel += new Vector2(bg.width / 2, bg.height / 2);
+            doorSprite.color = bg.GetPixel((int)pixel.x, (int)pixel.y);
+
+            // If the door is an entrance
+            if (i != 0) {
+                Door doorScript = door.AddComponent<Door>();
+                doorScript.world = this;
+                door.GetComponent<Animator>().SetTrigger("Expand");
+            }
+            // Else if it's a spawn point
+            else {
+                door.tag = "Spawn";
+                door.GetComponent<Animator>().SetTrigger("Shrink");
+            }
+
+            // Pick a new different location
+            int newPos = Random.Range(0, 3);
+            while (newPos == pos)
+                newPos = Random.Range(0, 3);
+            pos = newPos;
+        }
+    }
+
+    public void ChangeRoom(char id, bool spawnDoors = false) {
         this.roomToLoad = id;
         this.spawnDoors = spawnDoors;
+        Destroy(GameObject.FindGameObjectWithTag("Spawn"));
         sceneAnimator.SetTrigger("FadeOut");
     }
 
@@ -122,8 +128,9 @@ public class World : MonoBehaviour {
         Unfreeze();
     }
 
-    public void MovePlayerToSpawn(GameObject spawn) {
+    public void MovePlayerToSpawn() {
+        GameObject spawn = GameObject.FindGameObjectWithTag("Spawn");
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        player.transform.position = new Vector3(spawn.transform.position.x * 0.8f, spawn.transform.position.y * 0.7f, -1);
+        player.transform.position = new Vector3(spawn.transform.position.x, spawn.transform.position.y, -1);
     }
 }

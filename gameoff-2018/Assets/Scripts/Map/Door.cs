@@ -11,6 +11,7 @@ public class Door : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
+        Debug.Log("Door");
         if (!collision.CompareTag("Player"))
             return;
 
@@ -18,6 +19,6 @@ public class Door : MonoBehaviour {
         // Temporarely just load the next room.
         char nextRoom = (char)(world.CurrentRoom + 1);
         bool shouldSpawnDoors = nextRoom == 'F' ? false : true;
-        world.FadeToRoom(nextRoom, shouldSpawnDoors);
+        world.ChangeRoom(nextRoom, shouldSpawnDoors);
     }
 }
