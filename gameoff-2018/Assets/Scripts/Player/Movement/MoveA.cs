@@ -13,10 +13,9 @@ public class MoveA : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Vector2 v = new Vector2(pm.moveX, pm.moveY);
         // Don't go faster diagonally
-        if (v.magnitude > 1)
-            v.Normalize();
-        pm.rb.velocity = Vector2.Lerp(pm.rb.velocity, v * pm.speed, pm.lerpTime);
+        if (pm.v.magnitude > 1)
+            pm.v.Normalize();
+        pm.rb.velocity = Vector2.Lerp(pm.rb.velocity, pm.v * pm.speed, pm.lerpTime);
     }
 }

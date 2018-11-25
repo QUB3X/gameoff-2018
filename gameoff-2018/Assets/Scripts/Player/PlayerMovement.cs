@@ -15,15 +15,18 @@ public class PlayerMovement : MonoBehaviour {
     public float moveX = 0;
     [HideInInspector]
     public float moveY = 0;
+    [HideInInspector]
+    public Vector2 v;
 
     private void Update() {
         // moveX and moveY are a value between -1 and 1.
         moveX = Input.GetAxisRaw("Horizontal");
         moveY = Input.GetAxisRaw("Vertical");
+        v = new Vector2(moveX, moveY);
 
         // Animate player
         if (!world.IsFrozen) {
-            anim.SetBool("playerIsMoving", rb.velocity.magnitude > 0);
+            anim.SetBool("playerIsMoving", v.magnitude > 0);
             anim.SetFloat("mousePosition", Camera.main.ScreenToWorldPoint(Input.mousePosition).y - rb.transform.position.y);
         }
     }
