@@ -9,7 +9,8 @@ public class Music : MonoBehaviour {
     private float musicStartTime;
     private float timeBetweenBeats;                       //milliseconds
     private float previousOffset = 0;
-    
+
+    public Animator UIAnimator;
     public float ACCEPTABLE_TIME_OFFSET;                  //milliseconds
     public float UNITY_AUDIO_LATENCY;                     //milliseconds
 	
@@ -20,7 +21,7 @@ public class Music : MonoBehaviour {
             if (offset < previousOffset) {
                 // Beat!
                 // TODO: Show in UI
-                IsOnTime(correctLatency: false);
+                UIAnimator.SetTrigger("Beat");
             }
             previousOffset = offset;
         }
@@ -33,8 +34,8 @@ public class Music : MonoBehaviour {
         this.musicStartTime = next * 1000f;
         audioSource.PlayScheduled(next);
         // TODO: Fetch from database:
-        this.musicBPM = 195;
-        this.musicBeatStart = 11;
+        this.musicBPM = 66;
+        this.musicBeatStart = 120;
         this.timeBetweenBeats = 1000 * 60 / musicBPM;
         Debug.Log("Time between beats: " + timeBetweenBeats);
     }

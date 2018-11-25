@@ -28,7 +28,7 @@ public class PlayerShoot : MonoBehaviour {
 
         var shoot = Input.GetMouseButtonDown(0) || Input.GetKeyDown("z");
         if (shoot) {
-            //if (music.IsOnTime() == 0)
+            if (music.IsOnTime(correctLatency: true) == 0)
                 Shoot();
         }
 	}

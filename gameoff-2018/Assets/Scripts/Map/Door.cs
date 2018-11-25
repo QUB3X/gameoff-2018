@@ -6,7 +6,7 @@ public class Door : MonoBehaviour {
 
     private void Start() {
         if(world == null) {
-            world = GameObject.Find("/MapController").GetComponent<World>();
+            world = GameObject.Find("/GameController").GetComponent<World>();
         }
     }
 
