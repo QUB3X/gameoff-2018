@@ -146,6 +146,7 @@ public class World : MonoBehaviour {
             Destroy(player.GetComponent(currentPlayerMovement));
         }
         var script = System.Type.GetType("Move" + scriptId);
+        currentPlayerMovement = script;
         player.AddComponent(script);
     }
 
@@ -154,6 +155,7 @@ public class World : MonoBehaviour {
             Destroy(player.GetComponent(currentPlayerAttack));
         }
         var script = System.Type.GetType("Attack" + scriptId);
+        currentPlayerAttack = script;
         player.AddComponent(script);
     }
 }

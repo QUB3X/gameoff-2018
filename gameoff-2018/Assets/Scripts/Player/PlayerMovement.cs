@@ -16,12 +16,12 @@ public class PlayerMovement : MonoBehaviour {
     [HideInInspector]
     public float moveY = 0;
 
-    private void FixedUpdate() {
+    private void Update() {
         // moveX and moveY are a value between -1 and 1.
         moveX = Input.GetAxisRaw("Horizontal");
         moveY = Input.GetAxisRaw("Vertical");
 
-        // Move and animate player
+        // Animate player
         if (!world.IsFrozen) {
             anim.SetBool("playerIsMoving", rb.velocity.magnitude > 0);
             anim.SetFloat("mousePosition", Camera.main.ScreenToWorldPoint(Input.mousePosition).y - rb.transform.position.y);
