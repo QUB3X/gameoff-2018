@@ -7,12 +7,8 @@ public class World : MonoBehaviour {
     public float timeScaleDelta = 0.05f;
     public bool IsFrozen { get; private set; }
     public char CurrentRoom { get; private set; }
-
-    public Camera cam;
+    
     public Animator sceneAnimator;
-    public Animator playerAnimator;
-
-    // Assign the player object
     public GameObject player;
 
     private Dictionary<char, GameObject> maps = new Dictionary<char, GameObject>();
