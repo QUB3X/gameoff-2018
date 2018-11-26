@@ -331,8 +331,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 905090585}
-  - component: {fileID: 905090584}
   - component: {fileID: 905090586}
+  - component: {fileID: 905090584}
+  - component: {fileID: 905090588}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -352,9 +353,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeScaleDelta: 0.05
-  cam: {fileID: 519420031}
   sceneAnimator: {fileID: 905090586}
-  playerAnimator: {fileID: 1174546401}
   player: {fileID: 1174546395}
 --- !u!4 &905090585
 Transform:
@@ -388,6 +387,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &905090588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 905090583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d8bd62b62b80504c9dd1d96d03b920c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textContainer: {fileID: 1563127682}
+  text: {fileID: 404885316}
+  isPrinting: 0
 --- !u!1 &1174546395
 GameObject:
   m_ObjectHideFlags: 0
@@ -502,6 +515,7 @@ MonoBehaviour:
   lerpTime: 0.3
   moveX: 0
   moveY: 0
+  v: {x: 0, y: 0}
 --- !u!50 &1174546400
 Rigidbody2D:
   serializedVersion: 4
@@ -566,7 +580,6 @@ GameObject:
   - component: {fileID: 1236660560}
   - component: {fileID: 1236660559}
   - component: {fileID: 1236660558}
-  - component: {fileID: 1236660561}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -651,19 +664,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 999
   m_TargetDisplay: 0
---- !u!114 &1236660561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1236660556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d8bd62b62b80504c9dd1d96d03b920c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textContainer: {fileID: 1563127682}
-  text: {fileID: 404885316}
 --- !u!1 &1362110549
 GameObject:
   m_ObjectHideFlags: 0

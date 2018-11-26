@@ -10,20 +10,48 @@ public class Dialog : MonoBehaviour {
 
 	public Text text;
 
+    public const float defaultPrintSpeed = 0.3f;
+
+    // Set to true to print the output in Update()
+    [HideInInspector]
+    public bool isPrinting = false;
+
+    private float elapsedTime = 0;
+    private string stringBuffer = "";
+    private int stringCounter = 0;
+    private float printSpeed;
+
 	// Use this for initialization
 	void Start () {
-        textContainer.SetActive(false);
+        //textContainer.SetActive(false);
 	}
 	
-    void Show() {
+    void Update() {
+        if(isPrinting) {
+            if(elapsedTime > printSpeed) {
+                if(stringCounter < stringBuffer.Length) {
+                    text.text += stringBuffer[stringCounter];
+                    elapsedTime = 0;
+                    stringCounter++;
+                }
+            }
+            elapsedTime += Time.deltaTime;
+        }
+    }
+
+    public void Show(string content, float printSpeed = defaultPrintSpeed) {
         textContainer.SetActive(true);
+        isPrinting = true;
+        text.text = "";
+        stringBuffer = content;
+        stringCounter = 0;
+        this.printSpeed = printSpeed;
     }
 
-    void Hide() {
+    public void Hide() {
         textContainer.SetActive(false);
-    }
-
-    public void Print(string _text) {
-        text.text = _text;
+        isPrinting = false;
+        stringCounter = 0;
+        stringBuffer = "";
     }
 }

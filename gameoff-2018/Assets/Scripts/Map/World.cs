@@ -9,6 +9,7 @@ public class World : MonoBehaviour {
     public char CurrentRoom { get; private set; }
     
     public Animator sceneAnimator;
+
     public GameObject player;
 
     private Dictionary<char, GameObject> maps = new Dictionary<char, GameObject>();
@@ -20,7 +21,18 @@ public class World : MonoBehaviour {
     private System.Type currentPlayerMovement;
     private System.Type currentPlayerAttack;
 
+    // Used to show UI
+    private Dialog dialog;
+
+    // Dictionary of all dialog lines:
+    private Dictionary<string, string> dialogs;
+
     private void Start() {
+        // Use this to init all the dialog lines contained in Resources/dialogs.txt
+        dialogs = DialogParser.Parse();
+
+        dialog = FindObjectOfType<Dialog>();
+
         foreach(GameObject o in Resources.LoadAll<GameObject>("Rooms")) {
             maps.Add(o.name[0], o);
         }
@@ -28,6 +40,8 @@ public class World : MonoBehaviour {
         LoadRoom('A');
         ChangePlayerMovement('A');
         ChangePlayerAttack('A');
+
+        dialog.Show(dialogs["start_game"], 0.3f);
     }
 
     void FixedUpdate() {
