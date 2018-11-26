@@ -41,7 +41,7 @@ public class World : MonoBehaviour {
         ChangePlayerMovement('A');
         ChangePlayerAttack('A');
 
-        dialog.Show(dialogs["start_game"], 0.3f);
+        //dialog.Show(dialogs["start_game"], 0.3f);
     }
 
     void FixedUpdate() {
