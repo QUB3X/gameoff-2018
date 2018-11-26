@@ -5,9 +5,11 @@ using UnityEngine;
 public class EnemyMoveA : MonoBehaviour {
 
     private EnemyMovement em;
+    public float speed = 1f;
+    public float lerpTime = 0.3f;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         em = GetComponent<EnemyMovement>();
 	}
 	
@@ -16,6 +18,6 @@ public class EnemyMoveA : MonoBehaviour {
         // Don't go faster diagonally
         if (em.v.magnitude > 1)
             em.v.Normalize();
-        em.rb.velocity = Vector2.Lerp(em.rb.velocity, em.v * em.speed, em.lerpTime);
+        em.rb.velocity = Vector2.Lerp(em.rb.velocity, em.v * speed, lerpTime);
     }
 }

@@ -8,8 +8,6 @@ public class PlayerMovement : MonoBehaviour {
     public Rigidbody2D rb;
     public Animator anim;
     public World world;
-    public float speed;
-    public float lerpTime;
 
     [HideInInspector]
     public float moveX = 0;
@@ -27,7 +25,6 @@ public class PlayerMovement : MonoBehaviour {
         // Animate player
         if (!world.IsFrozen) {
             anim.SetBool("playerIsMoving", v.magnitude > 0);
-            anim.SetFloat("mousePosition", Camera.main.ScreenToWorldPoint(Input.mousePosition).y - rb.transform.position.y);
         }
     }
 }

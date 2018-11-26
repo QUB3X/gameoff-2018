@@ -20,8 +20,9 @@ public class PlayerShoot : MonoBehaviour {
         weapon.transform.rotation = Quaternion.Euler(0, 0, angle);
         weapon.transform.localPosition = new Vector3(weapon.transform.localPosition.x,
                                                      weapon.transform.localPosition.y,
-                                                     anim.GetFloat("mousePosition") > 0 ? 1 : -1);
+                                                     anim.GetFloat("lookDirection") > 0 ? 1 : -1);
 
+        anim.SetFloat("lookDirection", mousePos.y - transform.position.y);
         isShooting = Input.GetMouseButtonDown(0) || Input.GetKeyDown("z");
 	}
 }

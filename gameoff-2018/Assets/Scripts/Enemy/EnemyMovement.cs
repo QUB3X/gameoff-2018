@@ -8,8 +8,6 @@ public class EnemyMovement : MonoBehaviour {
     public Rigidbody2D rb;
     public Animator anim;
     public World world;
-    public float speed;
-    public float lerpTime;
 
     // Quick test, bad idea
     public float newMoveTime = 1.2f;
@@ -22,10 +20,10 @@ public class EnemyMovement : MonoBehaviour {
     [HideInInspector]
     public Vector2 v;
 
-    private void Update() {
+    void FixedUpdate() {
         if(elapsedTime > newMoveTime) {
-            moveX = Mathf.Sign(Random.Range(-1,1)) * Time.deltaTime * speed;
-            moveY = Mathf.Sign(Random.Range(-1,1)) * Time.deltaTime * speed;
+            moveX = Mathf.Sign(Random.Range(-1,1));
+            moveY = Mathf.Sign(Random.Range(-1,1));
             v = new Vector2(moveX, moveY);
             elapsedTime = 0;
         }
@@ -35,7 +33,7 @@ public class EnemyMovement : MonoBehaviour {
             anim.SetBool("enemyIsMoving", v.magnitude > 0);
         }
 
-        elapsedTime += Time.deltaTime;
+        elapsedTime += Time.fixedDeltaTime;
     }
 
     public void AddMovement(char scriptId) {
@@ -45,6 +43,6 @@ public class EnemyMovement : MonoBehaviour {
 
     // Debug
     private void Start() {
-     AddMovement('A');
+        AddMovement('A');
     }
 }

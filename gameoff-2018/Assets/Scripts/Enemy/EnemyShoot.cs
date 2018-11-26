@@ -10,28 +10,24 @@ public class EnemyShoot : MonoBehaviour {
     
     [HideInInspector]
     public bool isShooting;
-
-    private float angle = 0;
+    [HideInInspector]
+    public float targetAngle = 0;
+    private GameObject player;
 
     // Quick test, bad idea
     public float newAttackTime = 1.0f;
     private float elapsedTime = 0;
 
 	// Update is called once per frame
-	void Update () {
-        
-        if(elapsedTime > newAttackTime) {
-            Transform weapon = transform.GetChild(0);
-            angle = + Random.Range(0, 360);
-            weapon.transform.rotation = Quaternion.Euler(0, 0, angle);
-
+    void FixedUpdate () {
+        if (elapsedTime > newAttackTime) {
+            targetAngle = Mathf.Atan2(player.transform.position.y - transform.position.y, player.transform.position.x - transform.position.x) * Mathf.Rad2Deg - 90;
             isShooting = Random.Range(0.0f, 1.0f) > 0.5f ? true : false;
-
             elapsedTime = 0;
         }
 
-        elapsedTime += Time.deltaTime;
-	}
+        elapsedTime += Time.fixedDeltaTime;
+    }
 
     public void AddShooting(char scriptId) {
         var script = System.Type.GetType("EnemyAttack" + scriptId);
@@ -40,6 +36,7 @@ public class EnemyShoot : MonoBehaviour {
 
     // Debug
     void Start() {
+        player = GameObject.FindGameObjectWithTag("Player");
         AddShooting('A');
     }
 }
