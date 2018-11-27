@@ -29,7 +29,7 @@ In the next room you will die. Are you ready?
 -[ans_5_1]
 You can't escape the fear of death.
 -[ans_5_2]
-I trained for that moment.
+I trained for this moment.
 -[domanda_6]
 You passed your youth at the Academy. Do you have regrets?
 -[ans_6_1]
