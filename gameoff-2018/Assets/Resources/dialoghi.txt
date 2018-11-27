@@ -23,7 +23,7 @@ Do you think your friends passed the exam?
 -[ans_4_1]
 We trained together, I know their strength. They surely did it.
 -[ans_4_2]
-I can't know what happened, I was not there. 
+I cannot know what happened, I was not there. 
 -[domanda_5]
 In the next room you will die. Are you ready?
 -[ans_5_1]
