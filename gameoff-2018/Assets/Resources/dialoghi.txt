@@ -37,7 +37,7 @@ I met wonderful people. I cannot have regrets.
 -[ans_6_2]
 To be confined in such a small place is not the ideal.
 -[domanda_7]
-Are you ready for the life outside the Academy?
+Are you ready for life outside the Academy?
 -[ans_7_1]
 I will think about it when I'm out of here.
 -[ans_7_2]
