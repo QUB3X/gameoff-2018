@@ -262,7 +262,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 256
-    m_Alignment: 3
+    m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 0
     m_HorizontalOverflow: 0
@@ -385,6 +385,7 @@ MonoBehaviour:
   timeScaleDelta: 0.05
   sceneAnimator: {fileID: 905090586}
   player: {fileID: 1174546395}
+  dialog: {fileID: 905090588}
 --- !u!4 &905090585
 Transform:
   m_ObjectHideFlags: 0
@@ -852,7 +853,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1563127683
 RectTransform:
   m_ObjectHideFlags: 0
