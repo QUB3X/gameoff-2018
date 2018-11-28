@@ -19,7 +19,7 @@ public class World : MonoBehaviour {
     private bool willSpawnDoors;
     private bool willSpawnEnemies;
     private DialogModel dialogs;
-    private int visitedRoomsCount = 0;
+    private List<char> roomsLeftToVisit = new List<char>();
 
     // Used to remove player movement
     private System.Type currentPlayerMovement;
@@ -31,7 +31,10 @@ public class World : MonoBehaviour {
         dialogs = JsonUtility.FromJson<DialogModel>(jsonString.text);
 
         foreach(GameObject o in Resources.LoadAll<GameObject>("Rooms")) {
-            rooms.Add(o.name[0], o);
+            char name = o.name[0];
+            rooms.Add(name, o);
+            if (name != 'A' && name != 'F')
+                roomsLeftToVisit.Add(name);
         }
         doorPrefab = Resources.Load<GameObject>("Door");
         LoadRoom('A',spawnEnemies: false);
@@ -140,8 +143,7 @@ public class World : MonoBehaviour {
         this.willSpawnDoors = spawnDoors;
         this.willSpawnEnemies = spawnEnemies;
 
-        if (CurrentRoom != roomToLoad)
-            visitedRoomsCount++;
+        roomsLeftToVisit.Remove(id);
 
         Destroy(GameObject.FindGameObjectWithTag("Spawn"));
         sceneAnimator.SetTrigger("FadeOut");
@@ -205,6 +207,6 @@ public class World : MonoBehaviour {
     }
 
     public bool CheckWin() {
-        return (dialogs.questions.Count == 0 || visitedRoomsCount >= rooms.Count - 2);
+        return (roomsLeftToVisit.Count == 0 || dialogs.questions.Count == 0);
     }
 }
