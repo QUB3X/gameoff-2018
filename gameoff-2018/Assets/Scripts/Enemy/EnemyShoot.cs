@@ -7,6 +7,7 @@ public class EnemyShoot : MonoBehaviour {
     public Animator anim;
     public Transform firePoint;
     public GameObject bullet;
+    public EnemyStats stats;
     
     [HideInInspector]
     public bool isShooting;
@@ -16,7 +17,7 @@ public class EnemyShoot : MonoBehaviour {
 
     // Quick test, bad idea
     public float newAttackTime = 1.0f;
-    private float elapsedTime = 0;
+    private float elapsedTime = 999;
 
 	// Update is called once per frame
     void FixedUpdate () {

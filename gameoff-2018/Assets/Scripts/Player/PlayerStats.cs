@@ -4,39 +4,39 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour {
 
-	public int hitpoints {
-		get {
-			return hitpoints;
-		}
-		set {
-			if(value < 0) hitpoints = 0;
-			if(value > maxHitpoints) hitpoints = maxHitpoints;
-		}
-	}
+    private int _hitpoints;
+	public int Hitpoints {
+        get { return _hitpoints; }
+        private set {
+            if (value < 0) _hitpoints = 0;
+            else if (value > maxHitpoints) _hitpoints = maxHitpoints;
+            else _hitpoints = value;
+        }
+    }
 
-	public int damage;
+	public int damage = 1;
 
 	public int maxHitpoints = 10;
 
 	// Use this for initialization
 	void Start () {
-		hitpoints = maxHitpoints;
+		Hitpoints = maxHitpoints;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(hitpoints == 0) {
+		if(Hitpoints == 0) {
 			Die();
 		}
 	}
 
 	public void TakeDamage(int damage) {
-		hitpoints -= damage;
+        Hitpoints -= damage;
 		// Play sound/animation...
 	}
 
 	public void Die() {
-		// Play animation,
-		// show gameover screen... 
+        // Play animation,
+        // show gameover screen... 
 	}
 }

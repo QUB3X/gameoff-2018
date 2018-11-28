@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class AttackA : MonoBehaviour {
 
+    public int Cooldown = 1;
+
     private PlayerShoot ps;
+    private float cooldown = 0;
 
     private void Start() {
         ps = GetComponent<PlayerShoot>();
@@ -12,10 +15,16 @@ public class AttackA : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (ps.isShooting) {
-            ps.anim.SetTrigger("shoot");
-            // Spawn bullet
-            Instantiate(ps.bullet, ps.firePoint.position, ps.firePoint.rotation);
+        cooldown -= Time.deltaTime;
+        if (cooldown <= 0) {
+            if (ps.isShooting) {
+                cooldown = Cooldown;
+                ps.anim.SetTrigger("shoot");
+                // Spawn bullet
+                GameObject bullet = Instantiate(ps.bullet, ps.firePoint.position, ps.firePoint.rotation);
+                // What if bullet collides before its damage is set? Unlikely but could happen i guess?
+                bullet.GetComponent<Bullet>().damage = ps.stats.damage;
+            }
         }
     }
 }

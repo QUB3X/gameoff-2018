@@ -22,7 +22,8 @@ public class EnemyAttackA : MonoBehaviour {
         if (es.isShooting) {
             es.anim.SetTrigger("shoot");
             // Spawn bullet
-            Instantiate(es.bullet, es.firePoint.position, es.firePoint.rotation);
+            GameObject bullet = Instantiate(es.bullet, es.firePoint.position, es.firePoint.rotation);
+            bullet.GetComponent<Bullet>().damage = es.stats.damage;
             es.isShooting = false;
         }
     }

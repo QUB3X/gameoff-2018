@@ -7,11 +7,14 @@ public class PlayerShoot : MonoBehaviour {
     public Animator anim;
     public Transform firePoint;
     public GameObject bullet;
-    
+    public PlayerStats stats;
+    public int ShootCooldown;
+
     [HideInInspector]
     public bool isShooting;
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
         // Make weapon follow mouse cursor
         Transform weapon = transform.GetChild(0);
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);

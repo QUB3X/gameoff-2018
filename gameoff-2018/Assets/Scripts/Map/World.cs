@@ -43,7 +43,6 @@ public class World : MonoBehaviour {
         } else {
             Time.timeScale = 1;
         }
-        Debug.Log("FixedUpdate");
     }
 
     public void Freeze() {

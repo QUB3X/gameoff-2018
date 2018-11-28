@@ -11,7 +11,7 @@ public class EnemyMovement : MonoBehaviour {
 
     // Quick test, bad idea
     public float newMoveTime = 1.2f;
-    private float elapsedTime = 0;
+    private float elapsedTime = 999;
 
     [HideInInspector]
     public float moveX = 0;
