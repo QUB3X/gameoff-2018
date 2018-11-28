@@ -1,0 +1,44 @@
+-[dialogo_iniziale]
+Ah! Here you are. You are the last contestant for today. After years in our Academy how do you feel at such a big moment? Today is the day of your final exam, it's the time for you to show us that you are worthy to leave our mighty institution. Remember, today you will need to prove that you can balance your emotion, and defeat your enemy not only through your combat skill but also your wisdom. You will not be alone: I will guide you with questions, and your answers will provide your faith.
+-[domanda_1]
+Are you ready?
+-[ans_1_1]
+Yes.
+-[ans_1_2]
+No.
+-[domanda_2]
+Do you think the path ahead will be long?
+-[ans_2_1]
+If it will be, so be it.
+-[ans_2_2]
+I have no idea. 
+-[domanda_3]
+Do you think I should ask you personal questions? Would you feel comfortable?
+-[ans_3_1]
+I have nothing to hide, I'm happy with my life.
+-[ans_3_2]
+You asked two questions.
+-[domanda_4]
+Do you think your friends passed the exam?
+-[ans_4_1]
+We trained together, I know their strength. They surely did it.
+-[ans_4_2]
+I cannot know what happened, I was not there. 
+-[domanda_5]
+In the next room you will die. Are you ready?
+-[ans_5_1]
+You can't escape the fear of death.
+-[ans_5_2]
+I trained for this moment.
+-[domanda_6]
+You passed your youth at the Academy. Do you have regrets?
+-[ans_6_1]
+I met wonderful people. I cannot have regrets.
+-[ans_6_2]
+To be confined in such a small place is not the ideal.
+-[domanda_7]
+Are you ready for life outside the Academy?
+-[ans_7_1]
+I will think about it when I'm out of here.
+-[ans_7_2]
+I was comfortable there. 
