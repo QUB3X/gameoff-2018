@@ -19,10 +19,13 @@ public class Question
 public class DialogModel
 {
     public string welcome;
-    public Question[] questions;
+    public List<Question> questions;
 
     public Question PickRandom(){
         System.Random rand = new System.Random();
-        return questions[rand.Next(questions.Length)];
+        int idx = rand.Next(questions.Count);
+        Question q = questions[idx];
+        questions.RemoveAt(idx);
+        return q;
     }
 }

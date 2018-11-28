@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Dialog : MonoBehaviour {
 
-    // The box containing text
+    public World world;
 	public GameObject questionContainer;
     public GameObject ans0, ans1;
 
@@ -75,5 +75,12 @@ public class Dialog : MonoBehaviour {
         ans1Text.text = this.question.answers[1].text;
         ans0.SetActive(true);
         ans1.SetActive(true);
+    }
+
+    public void Answer(int id) {
+        Hide();
+        char nextRoom = this.question.answers[id].dst[0];
+        bool shouldSpawnDoors = (nextRoom == 'F' ? false : true);
+        world.ChangeRoom(nextRoom, shouldSpawnDoors);
     }
 }

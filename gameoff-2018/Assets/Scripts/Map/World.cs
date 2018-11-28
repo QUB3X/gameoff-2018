@@ -10,13 +10,14 @@ public class World : MonoBehaviour {
     
     public Animator sceneAnimator;
     public GameObject player;
-    public Dialog dialog;
+    public Dialog dialogView;
 
-    private Dictionary<char, GameObject> maps = new Dictionary<char, GameObject>();
+    private Dictionary<char, GameObject> rooms = new Dictionary<char, GameObject>();
     private GameObject doorPrefab;
     private char roomToLoad;
     private bool spawnDoors;
     private DialogModel dialogs;
+    private int visitedRoomsCount = 0;
 
     // Used to remove player movement
     private System.Type currentPlayerMovement;
@@ -28,7 +29,7 @@ public class World : MonoBehaviour {
         dialogs = JsonUtility.FromJson<DialogModel>(jsonString.text);
 
         foreach(GameObject o in Resources.LoadAll<GameObject>("Rooms")) {
-            maps.Add(o.name[0], o);
+            rooms.Add(o.name[0], o);
         }
         doorPrefab = Resources.Load<GameObject>("Door");
         LoadRoom('A');
@@ -42,6 +43,7 @@ public class World : MonoBehaviour {
         } else {
             Time.timeScale = 1;
         }
+        Debug.Log("FixedUpdate");
     }
 
     public void Freeze() {
@@ -50,6 +52,7 @@ public class World : MonoBehaviour {
 
     public void Unfreeze() {
         this.IsFrozen = false;
+        Time.timeScale = 1;
     }
 
     public void LoadRoom(char id, bool spawnDoors = false) {
@@ -57,7 +60,7 @@ public class World : MonoBehaviour {
         Destroy(GameObject.FindGameObjectWithTag("Room"));
 
         // Spawn new room
-        GameObject room = Instantiate(maps[id]);
+        GameObject room = Instantiate(rooms[id]);
         room.name = id.ToString();
 
         if (spawnDoors)
@@ -127,6 +130,10 @@ public class World : MonoBehaviour {
     public void ChangeRoom(char id, bool spawnDoors = false) {
         this.roomToLoad = id;
         this.spawnDoors = spawnDoors;
+
+        if (CurrentRoom != roomToLoad)
+            visitedRoomsCount++;
+
         Destroy(GameObject.FindGameObjectWithTag("Spawn"));
         sceneAnimator.SetTrigger("FadeOut");
     }
@@ -161,9 +168,18 @@ public class World : MonoBehaviour {
         player.AddComponent(script);
     }
 
-    public void PromptQuestion(){
-        // Get a random question
-        Question q = dialogs.PickRandom();
-        dialog.Show(q);
+    public void PromptQuestion(int idx = -1){
+        Question q;
+        if (idx != -1) {
+            q = dialogs.questions[idx];
+        } else {
+            // Get a random question
+            q = dialogs.PickRandom();
+        }
+        dialogView.Show(q);
+    }
+
+    public bool CheckWin() {
+        return (dialogs.questions.Count == 0 || visitedRoomsCount >= rooms.Count - 2);
     }
 }
