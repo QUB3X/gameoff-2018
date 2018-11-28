@@ -16,6 +16,7 @@ public class World : MonoBehaviour {
     private GameObject doorPrefab;
     private char roomToLoad;
     private bool spawnDoors;
+    private DialogModel dialogs;
 
     // Used to remove player movement
     private System.Type currentPlayerMovement;
@@ -24,7 +25,7 @@ public class World : MonoBehaviour {
     private void Start() {
         // Use this to init all the dialog lines contained in Resources/dialogs.txt
         TextAsset jsonString = Resources.Load("dialogs") as TextAsset;
-        DialogModel dialogs = JsonUtility.FromJson<DialogModel>(jsonString.text);
+        dialogs = JsonUtility.FromJson<DialogModel>(jsonString.text);
 
         foreach(GameObject o in Resources.LoadAll<GameObject>("Rooms")) {
             maps.Add(o.name[0], o);
@@ -33,8 +34,6 @@ public class World : MonoBehaviour {
         LoadRoom('A');
         ChangePlayerMovement('A');
         ChangePlayerAttack('A');
-
-        //dialog.Show(dialogs.welcome, 0.03f);
     }
 
     void FixedUpdate() {
@@ -160,5 +159,11 @@ public class World : MonoBehaviour {
         var script = System.Type.GetType("Attack" + scriptId);
         currentPlayerAttack = script;
         player.AddComponent(script);
+    }
+
+    public void PromptQuestion(){
+        // Get a random question
+        Question q = dialogs.PickRandom();
+        dialog.Show(q);
     }
 }

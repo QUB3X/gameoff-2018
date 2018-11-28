@@ -25,7 +25,7 @@
         {
             "question": "Do you think your friends passed the exam?",
             "answers": [
-                {"text": "We trained together, I know their strength. They surely did it.", "dst": "D"},
+                {"text": "We trained together, I know their strength. They surely did.", "dst": "D"},
                 {"text": "I cannot know what happened, I was not there.", "dst": "B"}
             ]
         },

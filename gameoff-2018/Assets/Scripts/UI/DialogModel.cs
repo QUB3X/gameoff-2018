@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 [System.Serializable]
 public class Answer
@@ -13,12 +12,17 @@ public class Answer
 public class Question
 {
     public string question;
-    public List<Answer> answers;
+    public Answer[] answers;
 }
 
 [System.Serializable]
 public class DialogModel
 {
     public string welcome;
-    public List<Question> questions;
+    public Question[] questions;
+
+    public Question PickRandom(){
+        System.Random rand = new System.Random();
+        return questions[rand.Next(questions.Length)];
+    }
 }
