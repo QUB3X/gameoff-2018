@@ -1,5 +1,0 @@
--[start_game]
-Hello! This is a sample dialog!
--[room_1]
-This is another text. Use this syntax to write texts.
-Also on a new line.

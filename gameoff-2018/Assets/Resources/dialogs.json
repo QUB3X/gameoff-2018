@@ -1,0 +1,54 @@
+{
+    "welcome": "Ah! Here you are. You are the last contestant for today. After years in our Academy how do you feel at such a big moment? Today is the day of your final exam, it's the time for you to show us that you are worthy to leave our mighty institution. Remember, today you will need to prove that you can balance your emotion, and defeat your enemy not only through your combat skill but also your wisdom. You will not be alone: I will guide you with questions, and your answers will provide your faith.",
+    "questions": [
+        {
+            "question": "Are you ready?",
+            "answers": [
+                {"text": "Yes.", "dst": "E"}, 
+                {"text": "No.", "dst": "B"}
+            ]
+        },
+        {
+            "question": "Do you think the path ahead will be long?",
+            "answers": [
+                {"text": "If it will be, so be it.", "dst": "E"},
+                {"text": "I have no idea.", "dst": "C"}
+            ]
+        },
+        {
+            "question": "Do you think I should ask you personal questions? Would you feel comfortable?",
+            "answers": [
+                {"text": "I have nothing to hide, I'm happy with my life.", "dst": "D"},
+                {"text": "You asked two questions.", "dst": "C"}
+            ]
+        },
+        {
+            "question": "Do you think your friends passed the exam?",
+            "answers": [
+                {"text": "We trained together, I know their strength. They surely did it.", "dst": "D"},
+                {"text": "I cannot know what happened, I was not there.", "dst": "B"}
+            ]
+        },
+        {
+            "question": "In the next room you will die. Are you ready?",
+            "answers": [
+                {"text": "You can't escape the fear of death.", "dst": "B"},
+                {"text": "I trained for this moment.", "dst": "E"}
+            ]
+        },
+        {
+            "question": "You passed your youth at the Academy. Do you have regrets?",
+            "answers": [
+                {"text": "I met wonderful people. I cannot have regrets.", "dst": "D"},
+                {"text": "To be confined in such a small place is not the ideal.", "dst": "B"}
+            ]
+        },
+        {
+            "question": "Are you ready for life outside the Academy?",
+            "answers": [
+                {"text": "I will think about it when I'm out of here.", "dst": "C"},
+                {"text": "I was comfortable there.", "dst": "D"}
+            ]
+        }
+    ]
+}
