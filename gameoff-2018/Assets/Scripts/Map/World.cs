@@ -11,11 +11,13 @@ public class World : MonoBehaviour {
     public Animator sceneAnimator;
     public GameObject player;
     public Dialog dialogView;
+    public GameObject enemyPrefab;
 
     private Dictionary<char, GameObject> rooms = new Dictionary<char, GameObject>();
     private GameObject doorPrefab;
     private char roomToLoad;
-    private bool spawnDoors;
+    private bool willSpawnDoors;
+    private bool willSpawnEnemies;
     private DialogModel dialogs;
     private int visitedRoomsCount = 0;
 
@@ -32,7 +34,7 @@ public class World : MonoBehaviour {
             rooms.Add(o.name[0], o);
         }
         doorPrefab = Resources.Load<GameObject>("Door");
-        LoadRoom('A');
+        LoadRoom('A',spawnEnemies: false);
         ChangePlayerMovement('A');
         ChangePlayerAttack('A');
     }
@@ -47,6 +49,9 @@ public class World : MonoBehaviour {
 
     public void Freeze() {
         this.IsFrozen = true;
+        foreach (var bullet in GameObject.FindGameObjectsWithTag("Bullet")) {
+            Destroy(bullet);
+        }
     }
 
     public void Unfreeze() {
@@ -54,7 +59,7 @@ public class World : MonoBehaviour {
         Time.timeScale = 1;
     }
 
-    public void LoadRoom(char id, bool spawnDoors = false) {
+    public void LoadRoom(char id, bool spawnDoors = false, bool spawnEnemies = true) {
         // Delete any room object instantiated.
         Destroy(GameObject.FindGameObjectWithTag("Room"));
 
@@ -64,6 +69,10 @@ public class World : MonoBehaviour {
 
         if (spawnDoors)
             SpawnDoors(room);
+
+        if (spawnEnemies)
+            Instantiate(enemyPrefab);
+
 
         MovePlayerToSpawn();
 
@@ -126,9 +135,10 @@ public class World : MonoBehaviour {
         }
     }
 
-    public void ChangeRoom(char id, bool spawnDoors = false) {
+    public void ChangeRoom(char id, bool spawnDoors = false, bool spawnEnemies = true) {
         this.roomToLoad = id;
-        this.spawnDoors = spawnDoors;
+        this.willSpawnDoors = spawnDoors;
+        this.willSpawnEnemies = spawnEnemies;
 
         if (CurrentRoom != roomToLoad)
             visitedRoomsCount++;
@@ -138,7 +148,7 @@ public class World : MonoBehaviour {
     }
 
     public void OnFadeOutComplete() {
-        LoadRoom(roomToLoad, spawnDoors);
+        LoadRoom(roomToLoad, willSpawnDoors, willSpawnEnemies);
         sceneAnimator.SetTrigger("FadeIn");
         Unfreeze();
     }
@@ -180,7 +190,7 @@ public class World : MonoBehaviour {
     }
 
     public void OnDimComplete() {
-        PromptQuestion();
+        PromptQuestion(CurrentRoom == 'A' ? 0 : -1);
     }
 
     public void PromptQuestion(int idx = -1){

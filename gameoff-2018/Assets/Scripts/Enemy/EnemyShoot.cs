@@ -17,7 +17,7 @@ public class EnemyShoot : MonoBehaviour {
 
     // Quick test, bad idea
     public float newAttackTime = 1.0f;
-    private float elapsedTime = 999;
+    private float elapsedTime = 0;
 
 	// Update is called once per frame
     void FixedUpdate () {

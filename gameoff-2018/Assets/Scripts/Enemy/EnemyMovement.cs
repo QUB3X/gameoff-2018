@@ -20,6 +20,13 @@ public class EnemyMovement : MonoBehaviour {
     [HideInInspector]
     public Vector2 v;
 
+    void Start() {
+        if(world == null) {
+            world = GameObject.Find("/GameController").GetComponent<World>();
+        }
+        AddMovement('A');
+    }
+
     void FixedUpdate() {
         if(elapsedTime > newMoveTime) {
             moveX = Mathf.Sign(Random.Range(-1,1));
@@ -39,10 +46,5 @@ public class EnemyMovement : MonoBehaviour {
     public void AddMovement(char scriptId) {
         var script = System.Type.GetType("EnemyMove" + scriptId);
         gameObject.AddComponent(script);
-    }
-
-    // Debug
-    private void Start() {
-        AddMovement('A');
     }
 }
