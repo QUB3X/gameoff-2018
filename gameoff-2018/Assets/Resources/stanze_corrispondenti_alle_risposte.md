@@ -1,48 +1,48 @@
 Leggenda:
-A- ordine
-B- felicità
-C- tristezza
-D- confusione
+EA n- ordine
+DB- felicità
+BC- tristezza
+CD- confusione
 
 -[domanda_1]
 Are you ready?
 -[ans_1_1]
-A
+E
 -[ans_1_2]
-C
+B
 -[domanda_2]
 Do you think the path ahead will be long?
 -[ans_2_1]
-A
+E
 -[ans_2_2]
-D
+C
 -[domanda_3]
 Do you think I should ask you personal questions? Would you feel comfortable?
 -[ans_3_1]
-B
--[ans_3_2]
 D
+-[ans_3_2]
+C
 -[domanda_4]
 Do you think your friends passed the exam?
 -[ans_4_1]
-B
+D
 -[ans_4_2]
-c
+B
 -[domanda_5]
 In the next room you will die. Are you ready?
 -[ans_5_1]
-C
+B
 -[ans_5_2]
-A
+E
 -[domanda_6]
 You passed your youth at the Academy. Do you have regrets?
 -[ans_6_1]
-B
+D
 -[ans_6_2]
-T
+B
 -[domanda_7]
 Are you ready for the life outside the Academy?
 -[ans_7_1]
-D
+C
 -[ans_7_2]
-B
+D
