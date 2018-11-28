@@ -1,8 +1,8 @@
 Leggenda:
-EA n- ordine
-DB- felicità
-BC- tristezza
-CD- confusione
+E- ordine
+D- felicità
+B- tristezza
+C- confusione
 
 -[domanda_1]
 Are you ready?
