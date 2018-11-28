@@ -74,7 +74,7 @@ public class World : MonoBehaviour {
             SpawnDoors(room);
 
         if (spawnEnemies)
-            Instantiate(enemyPrefab);
+            Instantiate(enemyPrefab, new Vector3(0,0,-1), Quaternion.identity);
 
 
         MovePlayerToSpawn();
