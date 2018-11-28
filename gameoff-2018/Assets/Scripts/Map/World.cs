@@ -179,7 +179,7 @@ public class World : MonoBehaviour {
 
     public void EnteredDoor() {
         if (CheckWin()) {
-            ChangeRoom('F', false);
+            ChangeRoom('F', false, false);
         } else {
             DimAndAskQuestion();
         }
@@ -196,7 +196,7 @@ public class World : MonoBehaviour {
     public void PromptQuestion(int idx = -1){
         Question q;
         if (idx != -1) {
-            q = dialogs.questions[idx];
+            q = dialogs.PickAt(idx);
         } else {
             // Get a random question
             q = dialogs.PickRandom();

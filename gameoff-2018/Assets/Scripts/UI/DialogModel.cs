@@ -24,6 +24,10 @@ public class DialogModel
     public Question PickRandom(){
         System.Random rand = new System.Random();
         int idx = rand.Next(questions.Count);
+        return PickAt(idx);
+    }
+
+    public Question PickAt(int idx) {
         Question q = questions[idx];
         questions.RemoveAt(idx);
         return q;
