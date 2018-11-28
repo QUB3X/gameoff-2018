@@ -167,6 +167,22 @@ public class World : MonoBehaviour {
         player.AddComponent(script);
     }
 
+    public void EnteredDoor() {
+        if (CheckWin()) {
+            ChangeRoom('F', false);
+        } else {
+            DimAndAskQuestion();
+        }
+    }
+
+    public void DimAndAskQuestion() {
+        sceneAnimator.SetTrigger("Dim");
+    }
+
+    public void OnDimComplete() {
+        PromptQuestion();
+    }
+
     public void PromptQuestion(int idx = -1){
         Question q;
         if (idx != -1) {
