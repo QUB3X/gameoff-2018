@@ -120,9 +120,9 @@ public class World : MonoBehaviour {
 
             // If the door is an entrance
             if (i != 0) {
+                door.tag = "Goal";
                 Door doorScript = door.AddComponent<Door>();
                 doorScript.world = this;
-                door.GetComponent<Animator>().SetTrigger("Expand");
             }
             // Else if it's a spawn point
             else {
@@ -179,7 +179,12 @@ public class World : MonoBehaviour {
         player.AddComponent(script);
     }
 
-    public void EnteredDoor() {
+    public void OnEnemyDied(GameObject enemy) {
+        if (GameObject.FindGameObjectsWithTag("Enemy").Length - 1 == 0) //-1 cause the enemy that just died isn't destroyed yet
+            GameObject.FindGameObjectWithTag("Goal").GetComponent<Animator>().SetTrigger("Expand");
+    }
+
+    public void OnEnteredDoor() {
         if (CheckWin()) {
             ChangeRoom('F', false, false);
         } else {

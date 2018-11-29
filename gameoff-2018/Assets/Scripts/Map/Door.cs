@@ -13,7 +13,7 @@ public class Door : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.tag == "Player" && GameObject.FindGameObjectsWithTag("Enemy").Length == 0) {
             world.Freeze();
-            world.EnteredDoor();
+            world.OnEnteredDoor();
         }
     }
 }

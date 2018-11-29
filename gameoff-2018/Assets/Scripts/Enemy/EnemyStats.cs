@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyStats : MonoBehaviour {
 
+    public World world;
+
     private int _hitpoints;
     public int Hitpoints {
         get { return _hitpoints; }
@@ -20,6 +22,8 @@ public class EnemyStats : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
+        if (world == null)
+            world = GameObject.Find("/GameController").GetComponent<World>();
         Hitpoints = maxHitpoints;
     }
 
@@ -37,6 +41,8 @@ public class EnemyStats : MonoBehaviour {
 
     public void Die() {
         // TODO: Animate
+        // Notify world
+        world.OnEnemyDied(gameObject);
         Destroy(gameObject);
     }
 }
