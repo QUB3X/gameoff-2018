@@ -10,20 +10,18 @@ public class IntroText : MonoBehaviour {
     public Dialog dialog;
 
     public Text introText;
-    // Use this for initialization
-    private bool didStartPrintingText = false;
+
     void Start () {
         // Use this to init all the dialog lines contained in Resources/dialogs.txt
         TextAsset jsonString = Resources.Load("dialogs") as TextAsset;
         DialogModel dialogs = JsonUtility.FromJson<DialogModel>(jsonString.text);
         dialog = GetComponent<Dialog>();
-        dialog.ShowWelcome(introText, dialogs.welcome);
-        didStartPrintingText = true;
+        dialog.ShowText(introText, dialogs.welcome, skippable: false);
     }
 	
 	// Update is called once per frame
     void Update () {
-        if(!dialog.isPrinting && didStartPrintingText) {
+        if(Input.anyKeyDown && !dialog.isPrinting) {
             SceneManager.LoadScene("playground");
         }
     }

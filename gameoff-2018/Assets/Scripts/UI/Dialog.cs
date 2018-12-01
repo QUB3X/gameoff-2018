@@ -24,6 +24,7 @@ public class Dialog : MonoBehaviour {
     private string stringBuffer = "";
     private int stringCounter = 0;
     private float printSpeed;
+    private bool skippable;
 
     // Use this for initialization
     void Start () {
@@ -49,7 +50,7 @@ public class Dialog : MonoBehaviour {
             elapsedTime += Time.unscaledDeltaTime;
 
             // Skip dialog
-            if(Input.anyKeyDown) {
+            if(skippable && Input.anyKeyDown) {
                 printedText.text = stringBuffer;
 
                 ConcludeDialog();
@@ -57,13 +58,14 @@ public class Dialog : MonoBehaviour {
         }
     }
 
-    public void ShowQuestion(Question question, float printSpeed = defaultPrintSpeed) {
+    public void ShowQuestion(Question question, float printSpeed = defaultPrintSpeed, bool skippable = true) {
         this.question = question;
         printedText.text = "";
         isPrinting = true;
         stringBuffer = question.question;
         stringCounter = 0;
         this.printSpeed = printSpeed;
+        this.skippable = skippable;
         questionContainer.SetActive(true);
     }
 
@@ -90,7 +92,7 @@ public class Dialog : MonoBehaviour {
         world.ChangeRoom(nextRoom, shouldSpawnDoors);
     }
 
-    public void ShowWelcome(Text textbox, string message, float printSpeed = defaultPrintSpeed) {
+    public void ShowText(Text textbox, string message, float printSpeed = defaultPrintSpeed, bool skippable = true) {
         this.printedText = textbox;
         printedText.text = "";
         isPrinting = true;
@@ -98,6 +100,7 @@ public class Dialog : MonoBehaviour {
         stringCounter = 0;
 
         this.printSpeed = printSpeed;
+        this.skippable = skippable;
     }
 
     private void ConcludeDialog() {

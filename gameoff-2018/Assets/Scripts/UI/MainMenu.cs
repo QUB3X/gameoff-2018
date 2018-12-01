@@ -8,7 +8,6 @@ public class MainMenu : MonoBehaviour {
 
     // Use this function in the editor
     public void DidPressStartButton() {
-        Debug.Log("Loading Level #1");
         SceneManager.LoadScene(1);
     }
 }

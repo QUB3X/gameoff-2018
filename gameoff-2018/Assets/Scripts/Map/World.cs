@@ -208,7 +208,7 @@ public class World : MonoBehaviour {
             // Get a random question
             q = dialogs.PickRandom();
         }
-        dialogView.ShowQuestion(q);
+        dialogView.ShowQuestion(q, skippable: false);
     }
 
     public bool CheckWin() {
