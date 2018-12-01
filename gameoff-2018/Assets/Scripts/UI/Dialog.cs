@@ -34,7 +34,7 @@ public class Dialog : MonoBehaviour {
             ans1Text = ans1.transform.GetChild(0).GetComponent<Text>();
         }
     }
-	
+
     void Update() {
         if(isPrinting) {
             if(elapsedTime > printSpeed) {

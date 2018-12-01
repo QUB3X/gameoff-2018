@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour {
 
+    public World world;
+
     private int _hitpoints;
 	public int Hitpoints {
         get { return _hitpoints; }
@@ -32,11 +34,12 @@ public class PlayerStats : MonoBehaviour {
 
 	public void TakeDamage(int damage) {
         Hitpoints -= damage;
-		// Play sound/animation...
-	}
+        // Play sound/animation...
+    }
 
 	public void Die() {
         // Play animation,
         // show gameover screen... 
+        world.Restart();
 	}
 }

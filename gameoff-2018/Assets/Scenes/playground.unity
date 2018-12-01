@@ -714,10 +714,10 @@ GameObject:
   - component: {fileID: 1174546397}
   - component: {fileID: 1174546399}
   - component: {fileID: 1174546402}
+  - component: {fileID: 1174546403}
   - component: {fileID: 1174546400}
   - component: {fileID: 1174546396}
   - component: {fileID: 1174546401}
-  - component: {fileID: 1174546403}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -883,6 +883,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ef3b58404d9347b792c95e526f40f62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  world: {fileID: 905090584}
   damage: 2
   maxHitpoints: 10
 --- !u!1 &1236660556

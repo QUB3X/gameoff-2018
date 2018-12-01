@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class World : MonoBehaviour {
 
@@ -20,6 +22,7 @@ public class World : MonoBehaviour {
     private bool willSpawnEnemies;
     private DialogModel dialogs;
     private List<char> roomsLeftToVisit = new List<char>();
+    private TextAsset dialogsJson;
 
     // Used to remove player movement
     private System.Type currentPlayerMovement;
@@ -27,8 +30,8 @@ public class World : MonoBehaviour {
 
     private void Start() {
         // Use this to init all the dialog lines contained in Resources/dialogs.txt
-        TextAsset jsonString = Resources.Load("dialogs") as TextAsset;
-        dialogs = JsonUtility.FromJson<DialogModel>(jsonString.text);
+        dialogsJson = Resources.Load("dialogs") as TextAsset;
+        dialogs = JsonUtility.FromJson<DialogModel>(dialogsJson.text);
 
         foreach(GameObject o in Resources.LoadAll<GameObject>("Rooms")) {
             char name = o.name[0];
@@ -40,6 +43,14 @@ public class World : MonoBehaviour {
         LoadRoom('A',spawnEnemies: false);
         ChangePlayerMovement('A');
         ChangePlayerAttack('A');
+    }
+
+    public void Restart() {
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        roomsLeftToVisit = rooms.Where(kvp => kvp.Key != 'A' && kvp.Key != 'F').ToDictionary(kvp => kvp.Key, kvp => kvp.Value).Keys.ToList();
+        dialogs = JsonUtility.FromJson<DialogModel>(dialogsJson.text);
+        Freeze();
+        ChangeRoom('A', false, false);
     }
 
     void FixedUpdate() {
@@ -79,9 +90,7 @@ public class World : MonoBehaviour {
                 enemy.GetComponent<SpriteRenderer>().color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
             }
 
-
         MovePlayerToSpawn();
-
         this.CurrentRoom = id;
     }
 
@@ -149,6 +158,8 @@ public class World : MonoBehaviour {
         roomsLeftToVisit.Remove(id);
 
         Destroy(GameObject.FindGameObjectWithTag("Spawn"));
+        foreach (var enemy in GameObject.FindGameObjectsWithTag("Enemy"))
+            Destroy(enemy);
         sceneAnimator.SetTrigger("FadeOut");
     }
 
