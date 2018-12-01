@@ -40,6 +40,6 @@ public class PlayerStats : MonoBehaviour {
 	public void Die() {
         // Play animation,
         // show gameover screen... 
-        world.Restart();
+        //world.Restart();
 	}
 }
