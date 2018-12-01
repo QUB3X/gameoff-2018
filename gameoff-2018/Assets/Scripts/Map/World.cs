@@ -201,6 +201,7 @@ public class World : MonoBehaviour {
     public void OnEnteredDoor() {
         if (CheckWin()) {
             ChangeRoom('F', false, false);
+            GameObject.Find("/GameController/Canvas/DemoText").SetActive(true);
         } else {
             DimAndAskQuestion();
         }
