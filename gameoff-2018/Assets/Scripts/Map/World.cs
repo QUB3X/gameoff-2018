@@ -74,7 +74,10 @@ public class World : MonoBehaviour {
             SpawnDoors(room);
 
         if (spawnEnemies)
-            Instantiate(enemyPrefab, new Vector3(0,0,-1), Quaternion.identity);
+            for (int i = 0; i < Random.Range(1, 3); i++) {
+                GameObject enemy = Instantiate(enemyPrefab, new Vector3(Random.Range(0, 1f), Random.Range(0, 1f), -1), Quaternion.identity);
+                enemy.GetComponent<SpriteRenderer>().color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+            }
 
 
         MovePlayerToSpawn();
