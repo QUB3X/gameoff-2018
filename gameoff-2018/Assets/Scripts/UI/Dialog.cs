@@ -6,11 +6,11 @@ using UnityEngine.UI;
 public class Dialog : MonoBehaviour {
 
     public World world;
-	public GameObject questionContainer;
+    public GameObject questionContainer;
     public GameObject ans0, ans1;
 
-	private Text printedText;
-	private Text ans0Text, ans1Text;
+    private Text printedText;
+    private Text ans0Text, ans1Text;
 
     public const float defaultPrintSpeed = 0.05f;
 
@@ -25,8 +25,8 @@ public class Dialog : MonoBehaviour {
     private int stringCounter = 0;
     private float printSpeed;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         if (ans0 != null && ans1 != null) {
             printedText = questionContainer.transform.GetChild(0).GetComponent<Text>();
             ans0Text = ans0.transform.GetChild(0).GetComponent<Text>();

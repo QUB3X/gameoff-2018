@@ -22,9 +22,9 @@ public class IntroText : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
-		if(!dialog.isPrinting && didStartPrintingText) {
+    void Update () {
+        if(!dialog.isPrinting && didStartPrintingText) {
             SceneManager.LoadScene("playground");
         }
-	}
+    }
 }
