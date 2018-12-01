@@ -699,6 +699,7 @@ MonoBehaviour:
   questionContainer: {fileID: 1563127682}
   ans0: {fileID: 368757462}
   ans1: {fileID: 1826471818}
+  animator: {fileID: 905090586}
   isPrinting: 0
   question:
     question: 

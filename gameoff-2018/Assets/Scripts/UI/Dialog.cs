@@ -8,6 +8,7 @@ public class Dialog : MonoBehaviour {
     public World world;
     public GameObject questionContainer;
     public GameObject ans0, ans1;
+    public Animator animator;
 
     private Text printedText;
     private Text ans0Text, ans1Text;
@@ -66,26 +67,24 @@ public class Dialog : MonoBehaviour {
         stringCounter = 0;
         this.printSpeed = printSpeed;
         this.skippable = skippable;
-        questionContainer.SetActive(true);
+        animator.SetTrigger("QuestionIn");
     }
 
     public void HideQuestion() {
         isPrinting = false;
         stringCounter = 0;
         stringBuffer = "";
-        ans0.SetActive(false);
-        ans1.SetActive(false);
-        questionContainer.SetActive(false);
+        animator.SetTrigger("QuestionOut");
     }
 
     public void ShowAnswers(){
         ans0Text.text = this.question.answers[0].text;
         ans1Text.text = this.question.answers[1].text;
-        ans0.SetActive(true);
-        ans1.SetActive(true);
+        animator.SetTrigger("AnswersIn");
     }
 
     public void Answer(int id) {
+        animator.SetTrigger("QuestionOut");
         HideQuestion();
         char nextRoom = this.question.answers[id].dst[0];
         bool shouldSpawnDoors = (nextRoom == 'F' ? false : true);
