@@ -9,9 +9,8 @@ public class Dialog : MonoBehaviour {
 	public GameObject questionContainer;
     public GameObject ans0, ans1;
 
-	private Text questionText;
-	private Text ans0Text;
-	private Text ans1Text;
+	private Text printedText;
+	private Text ans0Text, ans1Text;
 
     public const float defaultPrintSpeed = 0.05f;
 
@@ -28,32 +27,39 @@ public class Dialog : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        //textContainer.SetActive(false);
-        questionText = questionContainer.transform.GetChild(0).GetComponent<Text>();
-        ans0Text = ans0.transform.GetChild(0).GetComponent<Text>();
-        ans1Text = ans1.transform.GetChild(0).GetComponent<Text>();
-	}
+        if (ans0 != null && ans1 != null) {
+            printedText = questionContainer.transform.GetChild(0).GetComponent<Text>();
+            ans0Text = ans0.transform.GetChild(0).GetComponent<Text>();
+            ans1Text = ans1.transform.GetChild(0).GetComponent<Text>();
+        }
+    }
 	
     void Update() {
         if(isPrinting) {
             if(elapsedTime > printSpeed) {
                 if(stringCounter < stringBuffer.Length) {
-                    questionText.text += stringBuffer[stringCounter];
+                    printedText.text += stringBuffer[stringCounter];
                     elapsedTime = 0;
                     stringCounter++;
                 }
                 else{
-                    isPrinting = false;
-                    ShowAnswers();
+                    ConcludeDialog();
                 }
             }
             elapsedTime += Time.unscaledDeltaTime;
+
+            // Skip dialog
+            if(Input.anyKeyDown) {
+                printedText.text = stringBuffer;
+
+                ConcludeDialog();
+            }
         }
     }
 
-    public void Show(Question question, float printSpeed = defaultPrintSpeed) {
+    public void ShowQuestion(Question question, float printSpeed = defaultPrintSpeed) {
         this.question = question;
-        questionText.text = "";
+        printedText.text = "";
         isPrinting = true;
         stringBuffer = question.question;
         stringCounter = 0;
@@ -61,7 +67,7 @@ public class Dialog : MonoBehaviour {
         questionContainer.SetActive(true);
     }
 
-    public void Hide() {
+    public void HideQuestion() {
         isPrinting = false;
         stringCounter = 0;
         stringBuffer = "";
@@ -78,9 +84,26 @@ public class Dialog : MonoBehaviour {
     }
 
     public void Answer(int id) {
-        Hide();
+        HideQuestion();
         char nextRoom = this.question.answers[id].dst[0];
         bool shouldSpawnDoors = (nextRoom == 'F' ? false : true);
         world.ChangeRoom(nextRoom, shouldSpawnDoors);
+    }
+
+    public void ShowWelcome(Text textbox, string message, float printSpeed = defaultPrintSpeed) {
+        this.printedText = textbox;
+        printedText.text = "";
+        isPrinting = true;
+        stringBuffer = message;
+        stringCounter = 0;
+
+        this.printSpeed = printSpeed;
+    }
+
+    private void ConcludeDialog() {
+        isPrinting = false;
+        if (ans0 != null && ans1 != null) {
+            ShowAnswers();
+        }
     }
 }
